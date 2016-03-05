@@ -47,10 +47,8 @@ public class SessionFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        tabPos = getArguments().getInt(ScheduleFragment.SCHEDULE_TAB_POSITION);
-
-
         if (getArguments() != null) {
+            tabPos = getArguments().getInt(ScheduleFragment.SCHEDULE_TAB_POSITION);
             showBookmarkedOnly = getArguments().getBoolean(ScheduleFragment.SHOW_BOOKMARKED_ONLY, false);
         }
     }
@@ -58,7 +56,7 @@ public class SessionFragment extends Fragment {
     /**
      * Load data for display from database
      */
-    private void loadData() {
+    private synchronized void loadData() {
         data.clear();
         data.addAll(DbSingleton.getInstance().getSessionList());
 
@@ -85,18 +83,8 @@ public class SessionFragment extends Fragment {
         emptyState = v.findViewById(R.id.fragment_session_empty_state);
         sessionsRecyclerView = (RecyclerView) v.findViewById(R.id.sessionRecyclerView);
         sessionsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        sessionsListAdapter = new ScheduleSessionsListAdapter(data, tabPos);
-        sessionsRecyclerView.setAdapter(sessionsListAdapter);
         sessionsRecyclerView.setItemAnimator(new DefaultItemAnimator());
         sessionsRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(getActivity().getResources()));
-//        sessionsRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(View view, int position) {
-//                Intent intent = new Intent(getActivity(), ScheduleSessionDetailActivity.class);
-//                intent.putExtra(IntentStrings.SESSION, data.get(position).getTitle());
-//                startActivity(intent);
-//            }
-//        }));
         sessionsRecyclerView.addOnItemTouchListener(new RecyclerItemInteractListener(getActivity(), new RecyclerItemInteractListener.OnItemInteractListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -116,15 +104,9 @@ public class SessionFragment extends Fragment {
         }, R.id.item_session_bookmark_view));
 
         loadData();
+        sessionsListAdapter = new ScheduleSessionsListAdapter(data);
+        sessionsRecyclerView.setAdapter(sessionsListAdapter);
         return v;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        //Refresh the list
-        loadData();
-        sessionsListAdapter.notifyDataSetChanged();
     }
 
     public ScheduleSessionsListAdapter getSessionsListAdapter() {

@@ -25,8 +25,7 @@ import timber.log.Timber;
  * Date: 26-06-2015
  */
 public class ScheduleSessionsListAdapter extends BaseRVAdapter<Session, ScheduleSessionsListAdapter.Viewholder> {
-    private List<Session> sessions;
-    private int tabPos;
+    private List<Session> originalList, displayedList;
 
     @SuppressWarnings("all")
     Filter filter = new Filter() {
@@ -36,7 +35,7 @@ public class ScheduleSessionsListAdapter extends BaseRVAdapter<Session, Schedule
             // TODO: Use a query to do this, iterating over an entire set is pretty bad
             final ArrayList<Session> filteredSessionList = new ArrayList<>();
             String query = constraint.toString().toLowerCase();
-            for (Session session : sessions) {
+            for (Session session : displayedList) {
                 final String text = session.getTitle().toLowerCase();
                 if (text.contains(query)) {
                     filteredSessionList.add(session);
@@ -55,10 +54,10 @@ public class ScheduleSessionsListAdapter extends BaseRVAdapter<Session, Schedule
         }
     };
 
-    public ScheduleSessionsListAdapter(List<Session> sessions, int tabPos) {
+    public ScheduleSessionsListAdapter(List<Session> sessions) {
         super(sessions);
-        this.sessions = new ArrayList<>(sessions);
-        this.tabPos = tabPos;
+        this.originalList = new ArrayList<>(sessions);
+        this.displayedList = sessions;
     }
 
     @Override
@@ -111,9 +110,8 @@ public class ScheduleSessionsListAdapter extends BaseRVAdapter<Session, Schedule
 
     public void refresh() {
         Timber.d("Refreshing tracks from db");
-        DbSingleton dbSingleton = DbSingleton.getInstance();
         clear();
-//        animateTo(dbSingleton.getSessionList());
-        animateTo(sessions);
+        displayedList = new ArrayList<>(originalList);
+        animateTo(displayedList);
     }
 }
