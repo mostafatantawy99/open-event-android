@@ -99,7 +99,8 @@
                     android:fontFamily="sans-serif-light"
                     android:textSize="@dimen/schedule_session_text_size"
                     android:lineSpacingMultiplier="1.3"
-                    tools:text="Description goes here" />
+                    tools:text="Description goes here"
+                    tools:ignore="UnusedAttribute"/>
                 <View
                     style="@style/SeparatorLine" />
                 <LinearLayout
@@ -134,14 +135,6 @@
                         android:textStyle="bold"/>
                 </LinearLayout>
             </LinearLayout>
-
-
-            <TextView
-                style="@style/TextAppearance.AppCompat.Headline"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Speakers"
-                android:textIsSelectable="true"/>
         </LinearLayout>
     </ScrollView>
 </android.support.design.widget.CoordinatorLayout>

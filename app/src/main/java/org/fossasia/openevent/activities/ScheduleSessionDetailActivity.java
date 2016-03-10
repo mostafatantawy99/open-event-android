@@ -9,7 +9,6 @@ import android.preference.PreferenceManager;
 import android.provider.CalendarContract;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import timber.log.Timber;
 
@@ -52,7 +52,7 @@ public class ScheduleSessionDetailActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         final String title = getIntent().getStringExtra(IntentStrings.SESSION);
         String trackName = getIntent().getStringExtra(IntentStrings.TRACK);
-        Log.d(TAG, title);
+        Timber.d(title);
         TextView titleTextView = (TextView) findViewById(R.id.session_title);
         TextView dateTimeTextView = (TextView) findViewById(R.id.session_datetime);
         TextView organisationTextView = (TextView) findViewById(R.id.session_organisation);
@@ -66,8 +66,8 @@ public class ScheduleSessionDetailActivity extends BaseActivity {
         locationTextView.setText((dbSingleton.getMicrolocationById(session.getMicrolocations())).getName());
 
         titleTextView.setText(title);
-        SimpleDateFormat timeSDF = new SimpleDateFormat("hh:mm aa"),
-                humanSDF = new SimpleDateFormat("EEEE, dd MMM, hh:mm aa");
+        SimpleDateFormat timeSDF = new SimpleDateFormat("hh:mm aa", Locale.getDefault()),
+                humanSDF = new SimpleDateFormat("EEEE, dd MMM, hh:mm aa", Locale.getDefault());
 
         Date startDate = ISO8601Date.getDateObject(session.getStartTime());
         Date endDate = ISO8601Date.getDateObject(session.getEndTime());
@@ -123,11 +123,11 @@ public class ScheduleSessionDetailActivity extends BaseActivity {
             case R.id.bookmark_status:
                 DbSingleton dbSingleton = DbSingleton.getInstance();
                 if (dbSingleton.isBookmarked(session.getId())) {
-                    Log.d(TAG, "Bookmark Removed");
+                    Timber.d("Bookmark Removed");
                     dbSingleton.deleteBookmarks(session.getId());
                     item.setIcon(R.drawable.ic_bookmark_outline_white_24dp);
                 } else {
-                    Log.d(TAG, "Bookmarked");
+                    Timber.d("Bookmarked");
                     dbSingleton.addBookmarks(session.getId());
                     item.setIcon(R.drawable.ic_bookmark_white_24dp);
                     createNotification();
@@ -143,10 +143,10 @@ public class ScheduleSessionDetailActivity extends BaseActivity {
         DbSingleton dbSingleton = DbSingleton.getInstance();
         MenuItem item = menu.findItem(R.id.bookmark_status);
         if (dbSingleton.isBookmarked(session.getId())) {
-            Log.d(TAG, "Bookmarked");
+            Timber.d("Bookmarked");
             item.setIcon(R.drawable.ic_bookmark_white_24dp);
         } else {
-            Log.d(TAG, "Bookmark Removed");
+            Timber.d("Bookmark Removed");
             item.setIcon(R.drawable.ic_bookmark_outline_white_24dp);
         }
         return super.onCreateOptionsMenu(menu);

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/more_background">
+    style="@style/AppTheme.About">
     <!--TODO: Change this to the actual logo-->
     <ImageView
         android:layout_width="wrap_content"
@@ -10,7 +11,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/facebook"/>
+        android:src="@drawable/facebook"
+        tools:ignore="ContentDescription" />
     <RelativeLayout
         android:id="@+id/about_notification_mode"
         android:layout_width="match_parent"
@@ -32,7 +34,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
     </RelativeLayout>
     <LinearLayout
         android:id="@+id/about_website"
@@ -49,12 +52,13 @@
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="16dp"
-            android:src="@drawable/ic_web_grey"/>
+            android:src="@drawable/ic_web_grey"
+            tools:ignore="ContentDescription" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="2016.fossasia.com"/>
+            android:text="@string/website_url"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/about_twitter"
@@ -71,12 +75,13 @@
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="16dp"
-            android:src="@drawable/ic_twitter_box_grey"/>
+            android:src="@drawable/ic_twitter_box_grey"
+            tools:ignore="ContentDescription" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="\@fossasia"/>
+            android:text="@string/twitter_handle"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/about_rate"
@@ -93,12 +98,14 @@
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="16dp"
-            android:src="@drawable/ic_star_grey"/>
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_star_grey"
+            tools:ignore="ContentDescription" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="Rate Fossasia"/>
+            tools:text="@string/rate_fossasia"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/about_subscribe"
@@ -115,12 +122,13 @@
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="16dp"
-            android:src="@drawable/ic_email_grey"/>
+            android:src="@drawable/ic_email_grey"
+            tools:ignore="ContentDescription" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="Subscribe to mailing list"/>
+            android:text="@string/subscribe_mail"/>
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"

@@ -17,6 +17,7 @@ import org.fossasia.openevent.utils.ISO8601Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import timber.log.Timber;
 
@@ -75,7 +76,7 @@ public class ScheduleSessionsListAdapter extends BaseRVAdapter<Session, Schedule
     @Override
     public void onBindViewHolder(Viewholder holder, int position) {
         Session current = getItem(position);
-        SimpleDateFormat formatSDF = new SimpleDateFormat("hh:mm aa");
+        SimpleDateFormat formatSDF = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
         String startTime = formatSDF.format(ISO8601Date.getDateObject(current.getStartTime())),
                 endTime = formatSDF.format(ISO8601Date.getDateObject(current.getEndTime()));
 

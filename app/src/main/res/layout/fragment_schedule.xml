@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    style="@style/AppTheme.Schedule">
     <org.fossasia.openevent.views.TitlePickerView
         android:id="@+id/schedule_title_picker"
         android:layout_width="match_parent"
