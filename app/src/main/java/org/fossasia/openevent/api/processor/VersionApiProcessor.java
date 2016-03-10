@@ -102,7 +102,7 @@ public class VersionApiProcessor implements Callback<VersionResponseList> {
 
     @Override
     public void failure(RetrofitError error) {
-        Log.d("Ret", "RetrofitError");
+        Log.d("version", "fail");
         OpenEventApp.postEventOnUIThread(error);
         Log.d("ErrorDescription", String.valueOf(error.getCause()));
     }

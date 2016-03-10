@@ -75,10 +75,15 @@ public class SessionDetailActivity extends BaseActivity {
         text_title.setText(title);
         text_subtitle.setText(session.getSubtitle());
         text_track.setText(trackName);
+        String start = "";
+        String end = "";
 
-        String start = ISO8601Date.getTimeZoneDateString(ISO8601Date.getDateObject(session.getStartTime()));
-        String end = ISO8601Date.getTimeZoneDateString(ISO8601Date.getDateObject(session.getEndTime()));
-
+//        if (!session.getStartTime().isEmpty()) {
+//            start = ISO8601Date.getTimeZoneDateString(ISO8601Date.getDateObject(session.getStartTime()));
+//        }
+//        if (!session.getEndTime().isEmpty()) {
+//            end = ISO8601Date.getTimeZoneDateString(ISO8601Date.getDateObject(session.getEndTime()));
+//        }
 
         if (TextUtils.isEmpty(start) && TextUtils.isEmpty(end)) {
             text_time.setText(R.string.time_not_specified);
@@ -162,7 +167,8 @@ public class SessionDetailActivity extends BaseActivity {
     public void createNotification() {
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(ISO8601Date.getTimeZoneDate(ISO8601Date.getDateObject(session.getStartTime())));
+        //TODO : FIX DATES
+//        calendar.setTime(ISO8601Date.getTimeZoneDate(ISO8601Date.getDateObject(session.getStartTime())));
 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         Integer pref_result = Integer.parseInt(sharedPrefs.getString("notification", "10"));

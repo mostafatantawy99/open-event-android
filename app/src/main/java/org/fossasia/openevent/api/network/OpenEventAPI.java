@@ -13,25 +13,25 @@ import retrofit.http.Path;
 public interface OpenEventAPI {
 
 
-    @GET("/event/{id}/speakers")
+    @GET("/out/{id}/speakers")
     void getSpeakers(@Path("id") int id, Callback<SpeakerResponseList> speakerResponseListCallback);
 
-    @GET("/event/{id}/sponsors")
+    @GET("/out/{id}/sponsors.json")
     void getSponsors(@Path("id") int id, Callback<SponsorResponseList> speakerResponseListCallback);
 
-    @GET("/event/{id}/sessions")
+    @GET("/out/{id}/sessions")
     void getSessions(@Path("id") int id, Callback<SessionResponseList> sessionResponseListCallback);
 
     //TODO:Correct event api url to server's
-    @GET("/event/event")
+    @GET("/out/event")
     void getEvents(Callback<EventResponseList> eventResponseListCallback);
 
-    @GET("/event/{id}/microlocations")
+    @GET("/out/{id}/microlocations.json")
     void getMicrolocations(@Path("id") int id, Callback<MicrolocationResponseList> microlocationResponseListCallback);
 
-    @GET("/event/{id}/tracks")
+    @GET("/out/{id}/tracks")
     void getTracks(@Path("id") int id, Callback<TrackResponseList> trackResponseListCallback);
 
-    @GET("/event/{id}/version")
+    @GET("/out/{id}/version.json")
     void getVersion(@Path("id") int id, Callback<VersionResponseList> versionResponseListCallback);
 }

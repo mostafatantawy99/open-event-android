@@ -49,7 +49,7 @@ public class DatabaseOperations {
         while (!cur.isAfterLast()) {
             try {
                 s = new Session(
-                        cur.getInt(cur.getColumnIndex(DbContract.Sessions.ID)),
+                        cur.getString(cur.getColumnIndex(DbContract.Sessions.ID)),
                         cur.getString(cur.getColumnIndex(DbContract.Sessions.TITLE)),
                         cur.getString(cur.getColumnIndex(DbContract.Sessions.SUBTITLE)),
                         cur.getString(cur.getColumnIndex(DbContract.Sessions.SUMMARY)),
@@ -87,7 +87,7 @@ public class DatabaseOperations {
         //Should return only one due to UNIQUE constraint
         try {
             session = new Session(
-                    cursor.getInt(cursor.getColumnIndex(DbContract.Sessions.ID)),
+                    cursor.getString(cursor.getColumnIndex(DbContract.Sessions.ID)),
                     cursor.getString(cursor.getColumnIndex(DbContract.Sessions.TITLE)),
                     cursor.getString(cursor.getColumnIndex(DbContract.Sessions.SUBTITLE)),
                     cursor.getString(cursor.getColumnIndex(DbContract.Sessions.SUMMARY)),
@@ -380,7 +380,7 @@ public class DatabaseOperations {
         while (!sessionCursor.isAfterLast()) {
             try {
                 session = new Session(
-                        sessionCursor.getInt(sessionCursor.getColumnIndex(DbContract.Sessions.ID)),
+                        sessionCursor.getString(sessionCursor.getColumnIndex(DbContract.Sessions.ID)),
                         sessionCursor.getString(sessionCursor.getColumnIndex(DbContract.Sessions.TITLE)),
                         sessionCursor.getString(sessionCursor.getColumnIndex(DbContract.Sessions.SUBTITLE)),
                         sessionCursor.getString(sessionCursor.getColumnIndex(DbContract.Sessions.SUMMARY)),
@@ -523,7 +523,7 @@ public class DatabaseOperations {
             if (sessionTableCursor != null && sessionTableCursor.moveToFirst()) {
                 try {
                     session = new Session(
-                            sessionTableCursor.getInt(sessionTableCursor.getColumnIndex(DbContract.Sessions.ID)),
+                            sessionTableCursor.getString(sessionTableCursor.getColumnIndex(DbContract.Sessions.ID)),
                             sessionTableCursor.getString(sessionTableCursor.getColumnIndex(DbContract.Sessions.TITLE)),
                             sessionTableCursor.getString(sessionTableCursor.getColumnIndex(DbContract.Sessions.SUBTITLE)),
                             sessionTableCursor.getString(sessionTableCursor.getColumnIndex(DbContract.Sessions.SUMMARY)),
@@ -679,7 +679,7 @@ public class DatabaseOperations {
             while (!sessionCursor.isAfterLast()) {
                 try {
                     s = new Session(
-                            sessionCursor.getInt(sessionCursor.getColumnIndex(DbContract.Sessions.ID)),
+                            sessionCursor.getString(sessionCursor.getColumnIndex(DbContract.Sessions.ID)),
                             sessionCursor.getString(sessionCursor.getColumnIndex(DbContract.Sessions.TITLE)),
                             sessionCursor.getString(sessionCursor.getColumnIndex(DbContract.Sessions.SUBTITLE)),
                             sessionCursor.getString(sessionCursor.getColumnIndex(DbContract.Sessions.SUMMARY)),
@@ -788,7 +788,7 @@ public class DatabaseOperations {
         return speakers;
     }
 
-    public boolean isBookmarked(int sessionId, SQLiteDatabase db) {
+    public boolean isBookmarked(String sessionId, SQLiteDatabase db) {
         boolean number = false;
         Cursor c = null;
         try {
@@ -823,7 +823,7 @@ public class DatabaseOperations {
         cursor.moveToFirst();
         try {
             session = new Session(
-                    cursor.getInt(cursor.getColumnIndex(DbContract.Sessions.ID)),
+                    cursor.getString(cursor.getColumnIndex(DbContract.Sessions.ID)),
                     cursor.getString(cursor.getColumnIndex(DbContract.Sessions.TITLE)),
                     cursor.getString(cursor.getColumnIndex(DbContract.Sessions.SUBTITLE)),
                     cursor.getString(cursor.getColumnIndex(DbContract.Sessions.SUMMARY)),
@@ -878,18 +878,18 @@ public class DatabaseOperations {
         db.endTransaction();
     }
 
-    public void addBookmarksToDb(int id) {
-        String insertQuery = "INSERT INTO %s VALUES ('%d');";
+    public void addBookmarksToDb(String id) {
+        String insertQuery = "INSERT INTO %s VALUES (%s);";
         String query = String.format(Locale.ENGLISH,
                 insertQuery,
                 DbContract.Bookmarks.TABLE_NAME,
-                id
+                DatabaseUtils.sqlEscapeString(id)
         );
         DbSingleton dbSingleton = DbSingleton.getInstance();
         dbSingleton.insertQuery(query);
     }
 
-    public void deleteBookmarks(int id, SQLiteDatabase db) {
+    public void deleteBookmarks(String id, SQLiteDatabase db) {
         db.delete(DbContract.Bookmarks.TABLE_NAME, DbContract.Bookmarks.SESSION_ID + "=" + id, null);
 
     }

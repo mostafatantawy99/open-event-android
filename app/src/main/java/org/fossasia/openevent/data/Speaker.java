@@ -1,6 +1,7 @@
 package org.fossasia.openevent.data;
 
 import android.database.DatabaseUtils;
+import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -41,8 +42,8 @@ public class Speaker {
 
     String position;
 
-    @SerializedName("sessions")
-    int[] session;
+//    @SerializedName("sessions")
+//    int[] session;
 
     String country;
 
@@ -63,7 +64,6 @@ public class Speaker {
         this.linkedin = linkedin;
         this.organisation = organisation;
         this.position = position;
-        this.session = session;
         this.country = country;
     }
 
@@ -76,12 +76,9 @@ public class Speaker {
     }
 
     public int[] getSession() {
-        return session;
+        return null;
     }
 
-    public void setSession(int[] session) {
-        this.session = session;
-    }
 
     public String getPhoto() {
         return photo;
@@ -181,7 +178,7 @@ public class Speaker {
 
     public String generateSql() {
         String query_normal = "INSERT INTO %s VALUES ('%d', %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);";
-        return String.format(Locale.ENGLISH,
+        String query_formatted = String.format(Locale.ENGLISH,
                 query_normal,
                 DbContract.Speakers.TABLE_NAME,
                 id,
@@ -197,5 +194,9 @@ public class Speaker {
                 DatabaseUtils.sqlEscapeString(StringUtils.optionalString(organisation)),
                 DatabaseUtils.sqlEscapeString(StringUtils.optionalString(position)),
                 DatabaseUtils.sqlEscapeString(StringUtils.optionalString(country)));
+
+        Log.d("query", query_formatted);
+        return query_formatted;
     }
+
 }

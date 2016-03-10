@@ -50,6 +50,8 @@ public class SessionListResponseProcessor implements Callback<SessionResponseLis
     @Override
     public void failure(RetrofitError error) {
         // Do something with failure, raise an event etc.
+        Log.d("session", error.getCause().toString());
+
         OpenEventApp.getEventBus().post(new SessionDownloadEvent(false));
     }
 }

@@ -202,7 +202,7 @@ public class DbContract {
         public static final String CREATE_TABLE =
                 "CREATE TABLE " + TABLE_NAME
                         + " ("
-                        + ID + INT_TYPE + PRIMARY_KEY + COMMA_SEP
+                        + ID + TEXT_TYPE + PRIMARY_KEY + COMMA_SEP
                         + TITLE + TEXT_TYPE + COMMA_SEP
                         + SUBTITLE + TEXT_TYPE + COMMA_SEP
                         + SUMMARY + TEXT_TYPE + COMMA_SEP
@@ -397,7 +397,7 @@ public class DbContract {
         public static final String CREATE_TABLE =
                 "CREATE TABLE " + TABLE_NAME
                         + " ("
-                        + SESSION_ID + INT_TYPE + PRIMARY_KEY
+                        + SESSION_ID + TEXT_TYPE + PRIMARY_KEY
                         + " );";
 
         public static final String DELETE_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;

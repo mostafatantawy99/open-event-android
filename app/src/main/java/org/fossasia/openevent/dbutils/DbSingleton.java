@@ -88,11 +88,11 @@ public class DbSingleton {
         return databaseOperations.getVersionIds(mDb);
     }
 
-    public void addBookmarks(int bookmarkId) {
+    public void addBookmarks(String bookmarkId) {
         databaseOperations.addBookmarksToDb(bookmarkId);
     }
 
-    public void deleteBookmarks(int bookmarkId) {
+    public void deleteBookmarks(String bookmarkId) {
         databaseOperations.deleteBookmarks(bookmarkId, mDb);
     }
 
@@ -152,7 +152,7 @@ public class DbSingleton {
         return databaseOperations.getSessionbySessionname(sessionName, mDb);
     }
 
-    public boolean isBookmarked(int sessionId) {
+    public boolean isBookmarked(String sessionId) {
         return databaseOperations.isBookmarked(sessionId, mDb);
     }
 

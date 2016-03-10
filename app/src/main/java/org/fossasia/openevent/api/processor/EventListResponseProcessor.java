@@ -50,6 +50,8 @@ public class EventListResponseProcessor implements Callback<EventResponseList> {
 
     @Override
     public void failure(RetrofitError error) {
+        Log.d("event", "fail");
+
         OpenEventApp.getEventBus().post(new EventDownloadEvent(false));
     }
 }

@@ -47,6 +47,8 @@ public class SponsorListResponseProcessor implements Callback<SponsorResponseLis
 
     @Override
     public void failure(RetrofitError error) {
+        Log.d("sponsor", "fail");
+
         OpenEventApp.getEventBus().post(new SponsorDownloadEvent(false));
     }
 }

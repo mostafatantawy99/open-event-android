@@ -327,7 +327,7 @@ public class MainActivity extends BaseActivity {
     public void onTracksDownloadDone(TracksDownloadEvent event) {
         if (event.isState()) {
             eventsDone++;
-            Log.d(COUNTER_TAG, eventsDone + " " + counter);
+            Log.d(COUNTER_TAG, eventsDone + " tracks " + counter);
             if (counter == eventsDone) {
                 syncComplete();
             }
@@ -340,7 +340,7 @@ public class MainActivity extends BaseActivity {
     public void onSponsorsDownloadDone(SponsorDownloadEvent event) {
         if (event.isState()) {
             eventsDone++;
-            Log.d(COUNTER_TAG, eventsDone + " " + counter);
+            Log.d(COUNTER_TAG, eventsDone + " sponsors" + counter);
             if (counter == eventsDone) {
                 syncComplete();
             }
@@ -354,7 +354,7 @@ public class MainActivity extends BaseActivity {
     public void onSpeakersDownloadDone(SpeakerDownloadEvent event) {
         if (event.isState()) {
             eventsDone++;
-            Log.d(COUNTER_TAG, eventsDone + " " + counter);
+            Log.d(COUNTER_TAG, eventsDone + " speakers " + counter);
             if (counter == eventsDone) {
                 syncComplete();
             }
@@ -368,7 +368,7 @@ public class MainActivity extends BaseActivity {
     public void onSessionDownloadDone(SessionDownloadEvent event) {
         if (event.isState()) {
             eventsDone++;
-            Log.d(COUNTER_TAG, eventsDone + " " + counter);
+            Log.d(COUNTER_TAG, eventsDone + "session " + counter);
             if (counter == eventsDone) {
                 syncComplete();
             }
@@ -387,7 +387,7 @@ public class MainActivity extends BaseActivity {
     public void onEventsDownloadDone(EventDownloadEvent event) {
         if (event.isState()) {
             eventsDone++;
-            Log.d(COUNTER_TAG, eventsDone + " " + counter);
+            Log.d(COUNTER_TAG, eventsDone + " event " + counter);
             if (counter == eventsDone) {
                 syncComplete();
             }
@@ -401,7 +401,7 @@ public class MainActivity extends BaseActivity {
     public void onMicrolocationsDownloadDone(MicrolocationDownloadEvent event) {
         if (event.isState()) {
             eventsDone++;
-            Log.d(COUNTER_TAG, eventsDone + " " + counter);
+            Log.d(COUNTER_TAG, eventsDone + " micro " + counter);
             if (counter == eventsDone) {
                 syncComplete();
             }

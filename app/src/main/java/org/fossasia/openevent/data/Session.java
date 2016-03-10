@@ -29,7 +29,7 @@ public class Session {
     @SerializedName("end")
     String endTime;
 
-    int id;
+    String id;
 
     String level;
 
@@ -45,7 +45,7 @@ public class Session {
 
     int track;
 
-    public Session(int id, String title, String subtitle,
+    public Session(String id, String title, String subtitle,
                    String summary, String description,
                    String startTime, String endTime, String type,
                    int track, String level, int microlocations
@@ -63,11 +63,11 @@ public class Session {
         this.microlocations = microlocations;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -152,11 +152,11 @@ public class Session {
     }
 
     public String generateSql() {
-        String insertQueryFmt = "INSERT INTO %s VALUES ('%d', %s, %s, %s, %s, %s, %s, %s, '%d', %s, '%d');";
+        String insertQueryFmt = "INSERT INTO %s VALUES (%s, %s, %s, %s, %s, %s, %s, %s, '%d', %s, '%d');";
         return String.format(Locale.ENGLISH,
                 insertQueryFmt,
                 DbContract.Sessions.TABLE_NAME,
-                id,
+                DatabaseUtils.sqlEscapeString(id),
                 DatabaseUtils.sqlEscapeString(StringUtils.optionalString(title)),
                 DatabaseUtils.sqlEscapeString(StringUtils.optionalString(subtitle)),
                 DatabaseUtils.sqlEscapeString(StringUtils.optionalString(summary)),
